@@ -268,19 +268,6 @@
     }
     .location .pill svg { width: 14px; height: 14px; fill: currentColor; }
 
-    /* ---------- Gallery ---------- */
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: 120px;
-      gap: 8px;
-    }
-    .gallery figure { border-radius: 12px; overflow: hidden; background: var(--line); }
-    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; cursor: zoom-in; }
-    .gallery figure:hover img { transform: scale(1.05); }
-    .gallery .tall { grid-row: span 2; }
-    .gallery .wide { grid-column: span 2; }
-
     /* ---------- Footer ---------- */
     .card-foot {
       margin-top: 28px;
@@ -304,18 +291,6 @@
 
     .copy { text-align: center; color: var(--muted); font-size: .72rem; margin-top: 18px; }
 
-    /* ---------- Lightbox ---------- */
-    .lightbox {
-      position: fixed; inset: 0;
-      background: rgba(0, 15, 31, .92);
-      display: none; align-items: center; justify-content: center;
-      padding: 16px;
-      z-index: 50;
-      cursor: zoom-out;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-height: 90vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
-
     /* ---------- Entrance ---------- */
     @media (prefers-reduced-motion: no-preference) {
       .card { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
@@ -327,7 +302,6 @@
     @media (min-width: 600px) {
       .wrap { padding-top: 48px; }
       .hero { height: 260px; }
-      .gallery { grid-auto-rows: 150px; }
     }
   </style>
 </head>
@@ -426,15 +400,6 @@
         </a>
       </section>
 
-      <section class="section" aria-labelledby="h-galeria">
-        <h2 id="h-galeria">Fiscalía General del Estado</h2>
-        <div class="gallery">
-          <figure class="tall"><img src="assets/img/fiscalia-aerea.webp" alt="Vista aérea de la Fiscalía General del Estado" loading="lazy"></figure>
-          <figure><img src="assets/img/fiscalia-fachada.webp" alt="Fachada de la Fiscalía General del Estado" loading="lazy"></figure>
-          <figure><img src="assets/img/fiscalia-entrada.jpg" alt="Entrada principal de la Fiscalía General del Estado" loading="lazy"></figure>
-          <figure class="wide"><img src="assets/img/fiscalia-portada.jpg" alt="Personal de la Fiscalía General del Estado de Coahuila" loading="lazy"></figure>
-        </div>
-      </section>
 
       <footer class="card-foot">
         <img src="assets/img/logo-fiscalia-transparente.png" alt="Fiscalía General Coahuila" loading="lazy">
@@ -451,24 +416,9 @@
     <p class="copy">© <span id="year">2026</span> Fiscalía General del Estado de Coahuila de Zaragoza</p>
   </main>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
-    <img alt="">
-  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    const lb = document.getElementById('lightbox');
-    const lbImg = lb.querySelector('img');
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => {
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lb.classList.add('open');
-      });
-    });
-    lb.addEventListener('click', () => lb.classList.remove('open'));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
   </script>
 </body>
 </html>
